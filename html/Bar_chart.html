@@ -1,0 +1,96 @@
+
+<html>
+<head>
+<script src="canvasjs.min.js"></script>
+</head>
+<body>
+<div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+<?php include 'chart.php';?>
+<script>
+var count1='<?php echo count1[0];?>';
+alert(count1);
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	title:{
+		text: "Ongoing Polling Percentages"
+	},
+	axisY:{
+   //     minimum: 50,
+      maximum: 100
+  },
+	axisY2:{
+   //     minimum: 50,
+      maximum: 100
+  },
+	// axisY: {
+	// 	title: "Billions of Barrels",
+	// 	titleFontColor: "#4F81BC",
+	// 	lineColor: "#4F81BC",
+	// 	labelFontColor: "#4F81BC",
+	// 	tickColor: "#4F81BC"
+	// },
+	// axisY2: {
+	// 	title: "Millions of Barrels/day",
+	// 	titleFontColor: "#C0504E",
+	// 	lineColor: "#C0504E",
+	// 	labelFontColor: "#C0504E",
+	// 	tickColor: "#C0504E"
+	// },
+	toolTip: {
+		shared: true
+	},
+	legend: {
+		cursor:"pointer",
+		itemclick: toggleDataSeries
+	},
+	// itemclick: function(e){
+  //         onClick="document.location.href='poll1_regions.php'";
+  //       }
+	data: [{
+		// click: function(e){onClick="document.location.href='poll1_regions.php'" },
+		type: "column",
+		name: "In Favour",
+		legendText: "In Favour of",
+		showInLegend: true,
+		dataPoints:[
+			{ label: "Subsidy", y: count1 },
+			{ label: "Reservation", y: 30 },
+			{ label: "Attendance", y: 37 },
+		]
+	},
+	{
+		type: "column",
+		name: "Not in Favour",
+		legendText: "Not in Favour of",
+		axisYType: "secondary",
+		showInLegend: true,
+		dataPoints:[
+			{ label: "Subsidy", y: 33 },
+			{ label: "Reservation", y: 70 },
+			{ label: "Attendance", y: 63 },
+		]
+	}]
+});
+chart.render();
+console.log();
+
+function onClick(e){
+		onClick="document.location.href='poll1_regions.php'" }
+
+function toggleDataSeries(e) {
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+		e.dataSeries.visible = false;
+	}
+	else {
+		e.dataSeries.visible = true;
+	}
+	chart.render();
+}
+
+}
+</script>
+
+</body>
+</html>

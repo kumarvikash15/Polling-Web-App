@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      src="jquery/jquery.jqplot.js"
+    </script>
+  </head>
+  <body>
+    <h3>hello</h3>
+   <script type="text/javascript">
+   $(document).ready(function(){
+           var s1 = [2, 6, 7, 10];
+           var s2 = [7, 5, 3, 2];
+           var ticks = ['a', 'b', 'c', 'd'];
+
+           plot2 = $.jqplot('chart2', [s1, s2], {
+               seriesDefaults: {
+                   renderer:$.jqplot.BarRenderer,
+                   pointLabels: { show: true }
+               },
+               axes: {
+                   xaxis: {
+                       renderer: $.jqplot.CategoryAxisRenderer,
+                       ticks: ticks
+                   }
+               }
+           });
+
+           $('#chart2').bind('jqplotDataHighlight',
+               function (ev, seriesIndex, pointIndex, data) {
+                   $('#info2').html('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
+               }
+           );
+
+           $('#chart2').bind('jqplotDataUnhighlight',
+               function (ev) {
+                   $('#info2').html('Nothing');
+               }
+           );
+       });
+
+   </script>
+  </body>
+</html>
